@@ -12,11 +12,7 @@ pyenv local myenv
 python -m pip install -e .
 ```
 
-3. download `google-auth` and install
-```
-cd ..
-git clone https://github.com/googleapis/google-auth-library-python.git
-cd google-auth-library-python
+3. download `google-auth`, checkout `gdch_review` branch and install
 pyenv local myenv
 python -m pip install -e .
 ```
