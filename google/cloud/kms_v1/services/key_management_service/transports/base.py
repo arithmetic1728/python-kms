@@ -86,7 +86,7 @@ class KeyManagementServiceTransport(abc.ABC):
             always_use_jwt_access (Optional[bool]): Whether self signed JWT should
                 be used for service account credentials.
         """
-
+        audience = host
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
         if ":" not in host:
             host += ":443"
@@ -112,6 +112,8 @@ class KeyManagementServiceTransport(abc.ABC):
             credentials, _ = google.auth.default(
                 **scopes_kwargs, quota_project_id=quota_project_id
             )
+            if hasattr(credentials, "with_audience"):
+                credentials = credentials.with_audience(audience)
 
         # If the credentials are service account credentials, then always try to use self signed JWT.
         if (
